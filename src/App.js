@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import githubIcon from './github-mark.svg';
 import sampleData from './sampleData.json';
 import './App.scss';
@@ -60,10 +60,6 @@ function App() {
 			.catch((err) => {
 				console.log('Fetching weather failed, using dummy data.');
 				console.log(err);
-				// alert(
-				// 	'Fetching weather failed, using dummy data. ' +
-				// 		'Please refresh page to try again.',
-				// );
 				setWeatherData(sampleData);
 			});
 	}, [currentCity]);

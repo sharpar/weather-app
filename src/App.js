@@ -17,6 +17,26 @@ const CITIES = {
 	sandys: { name: 'Sandys', country: 'Bermuda', lat: 32.2797, long: -64.874 },
 };
 
+// Dark Sky's icon names mapped with the icons from
+// https://github.com/erikflowers/weather-icons
+const ICONS = {
+	'clear-day': 'day-sunny',
+	'clear-night': 'night-clear',
+	rain: 'rain',
+	snow: 'snow',
+	sleet: 'sleet',
+	wind: 'strong-wind',
+	fog: 'fog',
+	cloudy: 'cloudy',
+	'partly-cloudy-day': 'day-cloudy',
+	'partly-cloudy-night': 'night-cloudy',
+	hail: 'hail',
+	thunderstorm: 'thunderstorm',
+	tornado: 'tornado',
+};
+
+const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
 function App() {
 	const [currentCity, setCurrentCity] = useState('toronto');
 	const [weatherData, setWeatherData] = useState(null);
@@ -50,11 +70,14 @@ function App() {
 			});
 	}, [currentCity]);
 
+	const weatherToday = weatherData?.daily.data[0];
+	const weatherNext4Days = weatherData?.daily.data.slice(1, 5);
+
 	return (
 		<div className="App">
 			<main className="main">
 				<div className={'city-options'}>
-					{cityIds.map((cityId) => {
+					{Object.keys(CITIES).map((cityId) => {
 						const cityInfo = CITIES[cityId];
 						const isSelected = cityId === currentCity;
 
@@ -71,15 +94,37 @@ function App() {
 					})}
 				</div>
 
-				<div className="container--weather">
-					<div className="current-weather">Today</div>
-					<div className="container--week-forecast">
-						<div className="day-forecast">Wed 17</div>
-						<div className="day-forecast">Thu 12</div>
-						<div className="day-forecast">Fri -1</div>
-						<div className="day-forecast">Sat 23</div>
+				{weatherToday && weatherNext4Days && (
+					<div className="container--weather">
+						<div className="current-weather">
+							<div className="">Today</div>
+							<i className={`wi wi-${ICONS[weatherToday.icon]}`} />
+							<span>{Math.round(weatherToday.temperatureMax)}</span>
+							<div>{weatherToday.summary}</div>
+						</div>
+
+						<div className="container--week-forecast">
+							{weatherNext4Days.map((day) => {
+								const date = new Date(day.time * 1000);
+								const dayOfTheWeek = DAYS[date.getDay()];
+
+								return (
+									<div key={day.time} className="day-forecast">
+										<div className="day">{dayOfTheWeek}</div>
+										<div className="weather-icon">
+											<i className={`wi wi-${ICONS[day.icon]}`} />
+										</div>
+										<div className="temp">
+											{/* Ideally both low and high would be shown, for design
+													purposes, only showing one. */}
+											{Math.round(day.temperatureHigh)}
+										</div>
+									</div>
+								);
+							})}
+						</div>
 					</div>
-				</div>
+				)}
 			</main>
 
 			<footer>

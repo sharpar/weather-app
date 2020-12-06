@@ -15,7 +15,7 @@
   padding: 0 10vmin;
 }
 
-$border-weather-containers: 2px solid white;
+$border-weather-containers: 4px solid white;
 
 .city-options {
   width: 100%;
@@ -41,22 +41,40 @@ $border-weather-containers: 2px solid white;
 }
 
 .container--weather {
+  font-weight: 300;
+  font-size: calc(14px + 1vmin);
   width: 100%;
   background: #e3ecf1;
   border: $border-weather-containers;
-  border-radius: 5px;
+  border-radius: 10px;
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2);
 }
 
 .current-weather {
-  border-bottom: solid 2px white;
+  //border-bottom: $border-weather-containers;
+  padding: 50px;
+
+  .wi {
+    font-size: 50px;
+  }
 }
 
 .container--week-forecast {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .day-forecast {
+  padding: 25px;
+  font-size: calc(10px + 1.5vmin);
+  border-top: $border-weather-containers;
+  border-right: $border-weather-containers;
+  flex-grow: 1;
+
+  &:last-child {
+    border-right: 0;
+  }
 }
 
 // Footer

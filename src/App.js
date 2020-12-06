@@ -49,7 +49,7 @@ function App() {
 			// CORS issues with dark sky (another symptom of making the calls
 			// directly from the client):
 			// https://forum.freecodecamp.org/t/solved-having-trouble-getting-response-from-dark-sky-api/100653/5
-			const url = `xhttps://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${DARK_SKY_KEY}/${lat},${long}?units=ca`;
+			const url = `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${DARK_SKY_KEY}/${lat},${long}?units=ca`;
 
 			const result = await fetch(url);
 			return await result.json();

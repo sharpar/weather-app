@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import githubIcon from './github-mark.svg';
 import './App.scss';
 
 const CITIES = {
@@ -13,9 +14,7 @@ function App() {
 
 	return (
 		<div className="App">
-
-			<main className='main'>
-
+			<main className="main">
 				<div className={'city-options'}>
 					{cityIds.map((cityId) => {
 						const cityInfo = CITIES[cityId];
@@ -44,6 +43,19 @@ function App() {
 					</div>
 				</div>
 			</main>
+
+			<footer>
+				<a className="link" href="https://darksky.net/dev">
+					Powered by Dark Sky
+				</a>
+				<a href="https://github.com/sharpar/weather-app">
+					<img
+						className="github-mark"
+						src={githubIcon}
+						alt="Link to the Github repository for this app."
+					/>
+				</a>
+			</footer>
 		</div>
 	);
 }

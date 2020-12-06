@@ -52,15 +52,13 @@ function App() {
 			const url = `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${DARK_SKY_KEY}/${lat},${long}?units=ca`;
 
 			const result = await fetch(url);
-
-			const data = await result.json();
-			console.log({ result, data });
-			return data;
+			return await result.json();
 		}
 
 		fetchData()
 			.then((data) => setWeatherData(data))
 			.catch((err) => {
+				console.log('Fetching weather failed, using dummy data.');
 				console.log(err);
 				// alert(
 				// 	'Fetching weather failed, using dummy data. ' +

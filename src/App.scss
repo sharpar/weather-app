@@ -40,6 +40,9 @@ $border-weather-containers: 4px solid white;
   color: #5ca9df;
 }
 
+// Weather Container
+// -----------------------------------------------------------------------------
+
 .container--weather {
   font-weight: 300;
   font-size: calc(14px + 1vmin);
@@ -47,7 +50,7 @@ $border-weather-containers: 4px solid white;
   background: #e3ecf1;
   border: $border-weather-containers;
   border-radius: 10px;
-  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 40px 1px rgba(0, 0, 0, 0.1);
 }
 
 .current-weather {

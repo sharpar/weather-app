@@ -91,9 +91,15 @@ function App() {
 				{weatherToday && weatherNext4Days && (
 					<div className="container--weather">
 						<div className="current-weather">
-							<div className="">Today</div>
-							<i className={`wi wi-${ICONS[weatherToday.icon]}`} />
-							<span>{Math.round(weatherToday.temperatureMax)}</span>
+							<div className="day">Today</div>
+
+							<div className="container--temp">
+								<i className={`wi wi-${ICONS[weatherToday.icon]}`} />
+								<span className="temp">
+									{Math.round(weatherToday.temperatureMax)}°
+								</span>
+							</div>
+
 							<div>{weatherToday.summary}</div>
 						</div>
 
@@ -111,7 +117,7 @@ function App() {
 										<div className="temp">
 											{/* Ideally both low and high would be shown, for design
 													purposes, only showing one. */}
-											{Math.round(day.temperatureHigh)}
+											{Math.round(day.temperatureHigh)}°
 										</div>
 									</div>
 								);

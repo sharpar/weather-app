@@ -21,8 +21,7 @@ $border-weather-containers: $border-width-containers solid white;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(14px + 1.5vmin);
-  padding: 0 10vmin;
+  padding: 0 5vmin;
 }
 
 // City Options (the three cities to pick from)
@@ -40,9 +39,10 @@ $border-weather-containers: $border-width-containers solid white;
   padding: 10px;
   text-transform: uppercase;
   margin: 0 auto;
+  font-size: calc(18px + 1.5vmin);
 
   .country-name {
-    font-size: 10pt;
+    font-size: calc(10px + 0.5vmin);
   }
 }
 
@@ -56,7 +56,6 @@ $border-weather-containers: $border-width-containers solid white;
 
 .container--weather {
   font-weight: 300;
-  font-size: calc(14px + 1vmin);
   width: 100%;
   background: #e3ecf1;
   border: $border-weather-containers;
@@ -69,11 +68,25 @@ $border-weather-containers: $border-width-containers solid white;
 }
 
 .current-weather {
-  //border-bottom: $border-weather-containers;
   padding: 50px;
+  font-size: calc(18px + 1vmin);
+
+  .day {
+    margin-bottom: 20px;
+  }
+
+  .container--temp {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: calc(60px + 1vmin);
+  }
+
+  .temp {
+    vertical-align: top;
+  }
 
   .wi {
-    font-size: 50px;
+    margin-right: 25px;
   }
 }
 
@@ -94,16 +107,15 @@ $border-weather-containers: $border-width-containers solid white;
 
   .day {
     margin-bottom: 20px;
-    font-size: 25px;
+    font-size: calc(15px + 1vmin);
   }
 
   .wi {
-    font-size: 40px;
     margin-bottom: 20px;
   }
 
-  .temp {
-    font-size: 40px;
+  .wi, .temp {
+    font-size: calc(25px + 1vmin);
   }
 }
 

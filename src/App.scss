@@ -1,3 +1,12 @@
+// Variables (eventually move to separate partial if needed by other files).
+// -----------------------------------------------------------------------------
+
+$border-width-containers: 4px;
+$border-weather-containers: $border-width-containers solid white;
+
+// App
+// -----------------------------------------------------------------------------
+
 .App {
   text-align: center;
   color: #323238;
@@ -15,8 +24,6 @@
   font-size: calc(14px + 1.5vmin);
   padding: 0 10vmin;
 }
-
-$border-weather-containers: 4px solid white;
 
 // City Options (the three cities to pick from)
 // -----------------------------------------------------------------------------
@@ -71,6 +78,8 @@ $border-weather-containers: 4px solid white;
 }
 
 .container--week-forecast {
+  // Hide superfluous border.
+  margin-right: -$border-width-containers;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -78,13 +87,23 @@ $border-weather-containers: 4px solid white;
 
 .day-forecast {
   padding: 25px;
-  font-size: calc(10px + 1.5vmin);
   border-top: $border-weather-containers;
   border-right: $border-weather-containers;
-  flex-grow: 1;
+  flex: 1 1 10px;
+  background: #e3ecf1;
 
-  &:last-child {
-    border-right: 0;
+  .day {
+    margin-bottom: 20px;
+    font-size: 25px;
+  }
+
+  .wi {
+    font-size: 40px;
+    margin-bottom: 20px;
+  }
+
+  .temp {
+    font-size: 40px;
   }
 }
 

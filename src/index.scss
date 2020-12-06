@@ -6,18 +6,20 @@
 @import '~fontsource-montserrat/400-normal.css';
 @import '~fontsource-montserrat/700-normal.css';
 
-body {
-    margin: 0;
-    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+// For the temperature values
+@import '~fontsource-teko/400-normal.css';
 
-    background: #e3ecf1;
+body {
+	margin: 0;
+	font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+		'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+		'Helvetica Neue', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background: #e3ecf1;
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+		monospace;
 }

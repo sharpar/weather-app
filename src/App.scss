@@ -51,6 +51,10 @@ $border-weather-containers: 4px solid white;
   border: $border-weather-containers;
   border-radius: 10px;
   box-shadow: 0 0 40px 1px rgba(0, 0, 0, 0.1);
+
+  .temp {
+    font-family: Teko, serif;
+  }
 }
 
 .current-weather {

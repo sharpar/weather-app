@@ -47,7 +47,8 @@ $border-weather-containers: $border-width-containers solid white;
 
 .city.selected {
   font-weight: 700;
-  color: #5ca9df;
+  // Original color was #5ca9df, using a darker color for better accessibility.
+  color: #356f98;
 }
 
 // Weather Container

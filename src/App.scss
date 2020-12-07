@@ -102,7 +102,10 @@ $border-weather-containers: $border-width-containers solid white;
   border-top: $border-weather-containers;
   border-right: $border-weather-containers;
   flex: 1 1 10px;
-  background: #e3ecf1;
+
+  &:last-child {
+    border-bottom-right-radius: 10px;
+  }
 
   .day {
     margin-bottom: 20px;
@@ -124,6 +127,9 @@ $border-weather-containers: $border-width-containers solid white;
 footer {
   display: flex;
   flex-direction: column;
+  position: absolute;
+  width: 100%;
+  bottom: 20px;
 }
 
 .link {

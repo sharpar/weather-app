@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import githubIcon from './github-mark.svg';
-import sampleData from './sampleData.json';
 import './App.scss';
 
 // Ideally, this key would not be saved here. It is not secure to expose it on
@@ -40,9 +39,11 @@ const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 function App() {
 	const [currentCity, setCurrentCity] = useState('toronto');
 	const [weatherData, setWeatherData] = useState(null);
+	const [status, setStatus] = useState('idle');
 
 	useEffect(() => {
 		console.log(`Lets fetch data for ${currentCity}!`);
+		setStatus('idle');
 		const { lat, long } = CITIES[currentCity];
 
 		async function fetchData() {
@@ -56,11 +57,13 @@ function App() {
 		}
 
 		fetchData()
-			.then((data) => setWeatherData(data))
+			.then((data) => {
+				setWeatherData(data);
+				setStatus('resolved');
+			})
 			.catch((err) => {
-				console.log('Fetching weather failed, using dummy data.');
-				console.log(err);
-				setWeatherData(sampleData);
+				console.log('Fetching weather failed. Error:', err);
+				setStatus('rejected');
 			});
 	}, [currentCity]);
 
@@ -88,7 +91,16 @@ function App() {
 					})}
 				</div>
 
-				{weatherToday && weatherNext4Days && (
+				{status === 'idle' && <div>Loading the weather data...</div>}
+
+				{status === 'rejected' && (
+					<div>
+						There was an error loading the weather data. Please refresh the
+						page.
+					</div>
+				)}
+
+				{status === 'resolved' && weatherToday && weatherNext4Days && (
 					<div className="container--weather">
 						<div className="current-weather">
 							<div className="day">Today</div>

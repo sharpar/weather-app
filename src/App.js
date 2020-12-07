@@ -45,27 +45,27 @@ function App() {
 		setStatus('idle');
 		const { lat, long } = CITIES[currentCity];
 
-		async function fetchData() {
-			// CORS issues with dark sky (another symptom of making the calls
-			// directly from the client):
+		const fetchData = async () => {
+			// CORS issues with dark sky (another symptom of making the calls directly from the client):
 			// https://forum.freecodecamp.org/t/solved-having-trouble-getting-response-from-dark-sky-api/100653/5
-			const proxy = 'https://cors-anywhere.herokuapp.com/'
-			const url = `${proxy}https://api.darksky.net/forecast/${DARK_SKY_KEY}/${lat},${long}?units=ca`;
+			const proxy = 'https://cors-anywhere.herokuapp.com/';
+			const url = `${proxy}https://api.darksky.net/forecast/${DARK_SKY_KEY}/${lat},${long}?units=ca&exclude=[currently,minutely,hourly,flags,alerts]`;
 
-			const result = await fetch(url);
-			return await result.json();
-		}
-
-		fetchData()
-			.then((data) => {
-				setWeatherData(data);
+			try {
+				const response = await fetch(url);
+				const newWeatherData = await response.json();
+				setWeatherData(newWeatherData);
 				setStatus('resolved');
-			})
-			.catch(() => setStatus('rejected'));
+			} catch (err) {
+				setStatus('rejected');
+			}
+		};
+
+		fetchData();
 	}, [currentCity]);
 
-	const weatherToday = weatherData?.daily.data[0];
-	const weatherNext4Days = weatherData?.daily.data.slice(1, 5);
+	const weatherToday = weatherData?.daily?.data[0];
+	const weatherNext4Days = weatherData?.daily?.data.slice(1, 5);
 
 	return (
 		<div className="App">
@@ -88,6 +88,7 @@ function App() {
 					})}
 				</div>
 
+				<p>{status}</p>
 				{status === 'idle' && <div>Loading the weather data...</div>}
 
 				{status === 'rejected' && (

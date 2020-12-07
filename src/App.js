@@ -42,7 +42,6 @@ function App() {
 	const [status, setStatus] = useState('idle');
 
 	useEffect(() => {
-		console.log(`Lets fetch data for ${currentCity}!`);
 		setStatus('idle');
 		const { lat, long } = CITIES[currentCity];
 
@@ -61,10 +60,7 @@ function App() {
 				setWeatherData(data);
 				setStatus('resolved');
 			})
-			.catch((err) => {
-				console.log('Fetching weather failed. Error:', err);
-				setStatus('rejected');
-			});
+			.catch(() => setStatus('rejected'));
 	}, [currentCity]);
 
 	const weatherToday = weatherData?.daily.data[0];

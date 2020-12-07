@@ -35,9 +35,9 @@ $border-weather-containers: $border-width-containers solid white;
 }
 
 .city {
+  flex: 1 1 0;
   padding: 10px;
   text-transform: uppercase;
-  margin: 0 auto;
   font-size: calc(18px + 1.5vmin);
 
   .country-name {

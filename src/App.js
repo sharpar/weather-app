@@ -141,9 +141,11 @@ function App() {
 				</a>
 				<a href="https://github.com/sharpar/weather-app">
 					<img
-						className="github-mark"
-						src={githubIcon}
 						alt="Link to the Github repository for this app."
+						className="github-mark"
+						height={25}
+						src={githubIcon}
+						width={25}
 					/>
 				</a>
 			</footer>

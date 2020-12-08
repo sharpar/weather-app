@@ -3,7 +3,7 @@ import githubIcon from './github-mark.svg';
 import './App.scss';
 
 // Ideally, this key would not be saved here. It is not secure to expose it on
-// the front end, and in the code because this will be a public repository.
+// the front end, and in the code because this is a public repository.
 // It should be saved in a backend API, that the React app would make a request
 // to, the API would then fetch the data from Dark Sky.
 // Fortunately, no payment method is attached to the account so the key will
@@ -39,17 +39,20 @@ const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 function App() {
 	const [currentCity, setCurrentCity] = useState('toronto');
 	const [weatherData, setWeatherData] = useState(null);
+
+	// To monitor the network request state. Used to decide what to render.
 	const [status, setStatus] = useState('idle');
 
 	useEffect(() => {
 		setStatus('idle');
+
 		// https://developer.mozilla.org/en-US/docs/Web/API/AbortController
 		const abortController = new AbortController();
 
 		const { lat, long } = CITIES[currentCity];
 
 		const fetchData = async () => {
-			// CORS issues with dark sky (another symptom of making the calls directly from the client):
+			// CORS issues with Dark Sky (another symptom of making the calls directly from the client):
 			// https://forum.freecodecamp.org/t/solved-having-trouble-getting-response-from-dark-sky-api/100653/5
 			const proxy = 'https://cors-anywhere.herokuapp.com/';
 			const url = `${proxy}https://api.darksky.net/forecast/${DARK_SKY_KEY}/${lat},${long}?units=ca&exclude=[currently,minutely,hourly,flags,alerts]`;
@@ -83,7 +86,7 @@ function App() {
 	return (
 		<div className="App">
 			<main className="main">
-				<div className={'city-options'}>
+				<div className="city-options">
 					{Object.keys(CITIES).map((cityId) => {
 						const cityInfo = CITIES[cityId];
 						const isSelected = cityId === currentCity;
@@ -112,10 +115,10 @@ function App() {
 
 				{status === 'resolved' && weatherToday && weatherNext4Days && (
 					<div className="container--weather">
-						<div className="current-weather">
+						<div className="container--today">
 							<div className="day">Today</div>
 
-							<div className="container--temp">
+							<div className="container--temp-and-icon">
 								<i className={`wi wi-${ICONS[weatherToday.icon]}`} />
 								<span className="temp">
 									{Math.round(weatherToday.temperatureMax)}°
@@ -125,7 +128,7 @@ function App() {
 							<div>{weatherToday.summary}</div>
 						</div>
 
-						<div className="container--week-forecast">
+						<div className="container--week">
 							{weatherNext4Days.map((day) => {
 								const date = new Date(day.time * 1000);
 								const dayOfTheWeek = DAYS[date.getDay()];
@@ -133,9 +136,7 @@ function App() {
 								return (
 									<div key={day.time} className="day-forecast">
 										<div className="day">{dayOfTheWeek}</div>
-										<div className="weather-icon">
-											<i className={`wi wi-${ICONS[day.icon]}`} />
-										</div>
+										<i className={`wi wi-${ICONS[day.icon]}`} />
 										<div className="temp">
 											{/* Ideally both low and high would be shown, for design
 													purposes, only showing one. */}

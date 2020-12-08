@@ -11,7 +11,7 @@ import './App.scss';
 const DARK_SKY_KEY = 'de58b48418b7a1930004d32486ff7c93';
 
 const CITIES = {
-	dubai: { name: 'Dubai', country: 'UAE', lat: 25.055576, long: 55.144069 },
+	dubai: { name: 'Dubai', country: 'UAE', lat: 25.0555, long: 55.1440 },
 	toronto: { name: 'Toronto', country: 'Canada', lat: 43.6594, long: -79.3851 },
 	sandys: { name: 'Sandys', country: 'Bermuda', lat: 32.2797, long: -64.874 },
 };
@@ -84,7 +84,7 @@ function App() {
 	const weatherNext4Days = weatherData?.daily?.data.slice(1, 5);
 
 	return (
-		<div className="App">
+		<div className="app">
 			<main className="main">
 				<div className="city-options">
 					{Object.keys(CITIES).map((cityId) => {

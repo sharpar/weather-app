@@ -101,7 +101,6 @@ function App() {
 					})}
 				</div>
 
-				<p>{status}</p>
 				{status === 'idle' && <div>Loading the weather data...</div>}
 
 				{status === 'rejected' && (

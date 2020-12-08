@@ -3,11 +3,11 @@ import githubIcon from './github-mark.svg';
 import './App.scss';
 
 // Ideally, this key would not be saved here. It is not secure to expose it on
-// the front end and in the code because this will be a public repository.
+// the front end, and in the code because this will be a public repository.
 // It should be saved in a backend API, that the React app would make a request
 // to, the API would then fetch the data from Dark Sky.
 // Fortunately, no payment method is attached to the account so the key will
-// stop working after a 1000 calls.
+// stop working after 1000 calls.
 const DARK_SKY_KEY = 'de58b48418b7a1930004d32486ff7c93';
 
 const CITIES = {
@@ -94,7 +94,7 @@ function App() {
 								className={`city ${isSelected ? 'selected' : ''}`}
 								onClick={() => setCurrentCity(cityId)}
 							>
-								<div className="city-name">{cityInfo.name}</div>
+								<div>{cityInfo.name}</div>
 								<div className="country-name">{cityInfo.country}</div>
 							</div>
 						);

@@ -43,6 +43,9 @@ function App() {
 
 	useEffect(() => {
 		setStatus('idle');
+		// https://developer.mozilla.org/en-US/docs/Web/API/AbortController
+		const abortController = new AbortController();
+
 		const { lat, long } = CITIES[currentCity];
 
 		const fetchData = async () => {
@@ -52,16 +55,26 @@ function App() {
 			const url = `${proxy}https://api.darksky.net/forecast/${DARK_SKY_KEY}/${lat},${long}?units=ca&exclude=[currently,minutely,hourly,flags,alerts]`;
 
 			try {
-				const response = await fetch(url);
+				const response = await fetch(url, { signal: abortController.signal });
 				const newWeatherData = await response.json();
 				setWeatherData(newWeatherData);
 				setStatus('resolved');
-			} catch (err) {
-				setStatus('rejected');
+			} catch (error) {
+				if (error.name === 'AbortError') {
+					// Don't do anything. Aborting a fetch throws an error.
+				} else {
+					setStatus('rejected');
+				}
 			}
 		};
 
 		fetchData();
+
+		// Clean up function. If the city is changed before the weather data has
+		// been fetched, abort the previous request(s) to avoid showing wrong data.
+		return () => {
+			abortController.abort();
+		};
 	}, [currentCity]);
 
 	const weatherToday = weatherData?.daily?.data[0];
